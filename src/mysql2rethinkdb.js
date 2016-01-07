@@ -1,3 +1,4 @@
+require('babel-polyfill');
 import mysql from 'mysql';
 import _ from 'lodash';
 import {

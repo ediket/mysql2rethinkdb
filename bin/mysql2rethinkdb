@@ -1,10 +1,5 @@
 #!/usr/bin/env node
 /* eslint no-var: 0, vars-on-top: 0 */
-require('babel/register')({
-  stage: 0,
-  ignore: /node_modules/,
-});
-
 var mysql2rethinkdb = require('../');
 var argv = require('yargs')
   .usage('Usage: $0 -D [database]')
