@@ -40,3 +40,9 @@ mysql2rethinkdb({
   database: 'test',
 });
 ```
+
+# Related Links
+
+- https://github.com/seamusabshere/mysql2xxxx
+- https://rethinkdb.com/docs/importing/
+- https://github.com/calder/Methink
