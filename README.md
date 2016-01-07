@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/mysql2rethinkdb.svg)](https://badge.fury.io/js/mysql2rethinkdb)
+
 # What is it
 
 Migrate mysql tables into rethinkdb.
