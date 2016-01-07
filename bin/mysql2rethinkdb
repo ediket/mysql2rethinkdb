@@ -28,4 +28,6 @@ mysql2rethinkdb({
   password: argv.password,
   port: argv.port,
   database: argv.database,
+}).then(function () {
+  process.exit();
 });

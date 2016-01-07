@@ -4,16 +4,6 @@
 
 Migrate mysql tables into rethinkdb.
 
-# Dependencies
-
-https://github.com/seamusabshere/mysql2xxxx
-
-```
-gem install mysql2xxxx
-gem install mysql
-gem install iconv
-```
-
 # Usage
 
 __Command-Line__
@@ -43,6 +33,4 @@ mysql2rethinkdb({
 
 # Related Links
 
-- https://github.com/seamusabshere/mysql2xxxx
 - https://rethinkdb.com/docs/importing/
-- https://github.com/calder/Methink

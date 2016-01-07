@@ -47,6 +47,7 @@ async function mysql2rethinkdb(options = {}) {
   await Promise.all(
     _.map(tables, async table => {
       const fileName = await mysql2json({
+        connection,
         database,
         table,
       });

@@ -4,16 +4,16 @@ import {
 } from './helpers';
 import os from 'os';
 import path from 'path';
+import { promisifyAll } from 'bluebird';
+const fs = promisifyAll(require('fs'));
 
-export async function mysql2json({ database, table }) {
+
+export async function mysql2json({ connection, table }) {
+  connection = promisifyAll(connection);
   const fileName = path.join(os.tmpdir(), `${table}.json`);
-  const cmd = `
-    mysql2json \
-      --user=root \
-      --database=${database} \
-      --execute="select * from ${table}" > ${fileName}
-  `;
-  await runShellCommand(cmd);
+
+  const rows = await connection.queryAsync(`SELECT * FROM ${table}`);
+  await fs.writeFileAsync(fileName, JSON.stringify(rows));
   return fileName;
 }
 
