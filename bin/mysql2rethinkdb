@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+/* eslint no-var: 0, vars-on-top: 0 */
+require('babel/register')({
+  stage: 0,
+  ignore: /node_modules/,
+});
+
+var mysql2rethinkdb = require('../');
+var argv = require('yargs')
+  .usage('Usage: $0 -D [database]')
+  .alias('h', 'host')
+  .nargs('h', 1)
+  .describe('h', 'Mysql host')
+  .alias('u', 'user')
+  .nargs('u', 1)
+  .describe('u', 'Mysql user')
+  .alias('p', 'password')
+  .nargs('p', 1)
+  .describe('p', 'Mysql user password')
+  .alias('P', 'port')
+  .nargs('P', 1)
+  .describe('P', 'Mysql port')
+  .alias('D', 'database')
+  .nargs('D', 1)
+  .demand(['D'])
+  .describe('D', 'Mysql database')
+  .help('help')
+  .argv;
+
+mysql2rethinkdb({
+  host: argv.host,
+  user: argv.user,
+  password: argv.password,
+  port: argv.port,
+  database: argv.database,
+});
