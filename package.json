@@ -1,6 +1,6 @@
 {
   "name": "mysql2rethinkdb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "./lib/mysql2rethinkdb.js",
   "bin": "./bin/mysql2rethinkdb",
