@@ -1,12 +1,13 @@
 {
   "name": "mysql2rethinkdb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./lib/mysql2rethinkdb.js",
   "bin": "./bin/mysql2rethinkdb",
   "author": "ironhee",
   "license": "MIT",
   "dependencies": {
+    "babel": "^5.8.34",
     "bluebird": "^3.1.1",
     "lodash": "^3.10.1",
     "mysql": "^2.10.0",
@@ -14,7 +15,6 @@
     "yargs": "^3.31.0"
   },
   "devDependencies": {
-    "babel": "^5.8.34",
     "babel-eslint": "^4.1.6",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.0.2"
