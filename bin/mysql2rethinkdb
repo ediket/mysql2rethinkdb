@@ -23,6 +23,10 @@ var argv = require('yargs')
   .alias('t', 'tables')
   .array('t')
   .describe('t', 'Mysql tables')
+  .alias('w', 'workers')
+  .nargs('w', 1)
+  .default('w', 8)
+  .describe('w', 'Parallel worker count')
   .help('help')
   .argv;
 
@@ -33,6 +37,7 @@ mysql2rethinkdb({
   port: argv.port,
   database: argv.database,
   tables: argv.tables,
+  workers: argv.workers,
 }).then(function () {
   process.exit();
 });

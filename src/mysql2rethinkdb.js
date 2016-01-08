@@ -9,8 +9,8 @@ import {
   importRethinkdbFromJson,
   removeFile,
 } from './helpers';
-import {
-} from './converters';
+import { promisify } from 'bluebird';
+const runParallelLimit = promisify(require('run-parallel-limit'));
 
 function logMigrationStart() {
   console.log(chalk.cyan.bold('Migration start.'));
@@ -33,7 +33,7 @@ function logMigrationEnd() {
 }
 
 async function mysql2rethinkdb(options = {}) {
-  const { host, port, password, user, database } = options;
+  const { host, port, password, user, database, workers = 8 } = options;
   let { tables } = options;
   const mysqlOptions = _.omit({
     host,
@@ -55,21 +55,25 @@ async function mysql2rethinkdb(options = {}) {
 
   logTables(tables);
 
-  await *_.map(tables, async table => {
-    try {
-      const rows = await getMysqlTableRows({ connection, table });
-      const fileName = saveTableRowsAsJson({ table, rows });
-      await importRethinkdbFromJson({
-        fileName,
-        database,
-        table,
-      });
-      removeFile(fileName);
-      logTableMigrated(database, table);
-    } catch (e) {
-      logTableMigrationFail(database, table, e);
-    }
-  });
+  await runParallelLimit(
+    _.map(tables, table => async callback => {
+      try {
+        const rows = await getMysqlTableRows({ connection, table });
+        const fileName = saveTableRowsAsJson({ table, rows });
+        await importRethinkdbFromJson({
+          fileName,
+          database,
+          table,
+        });
+        removeFile(fileName);
+        logTableMigrated(database, table);
+        callback(null, table);
+      } catch (e) {
+        logTableMigrationFail(database, table, e);
+        callback(table, null);
+      }
+    }), workers
+  );
 
   logMigrationEnd();
 

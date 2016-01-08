@@ -12,7 +12,7 @@ __Command-Line__
 
 ```bash
 npm install -g mysql2rethinkdb;
-mysql2rethinkdb -u [user] -p [password] -h [host] -P [port] -D [database] -t [tables]
+mysql2rethinkdb -u [user] -p [password] -h [host] -P [port] -D [database] -t [tables] -w [worker count]
 ```
 
 __Source Code__

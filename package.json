@@ -20,6 +20,7 @@
     "chalk": "^1.1.1",
     "lodash": "^3.10.1",
     "mysql": "^2.10.0",
+    "run-parallel-limit": "^1.0.2",
     "shelljs": "^0.5.3",
     "yargs": "^3.31.0"
   },
