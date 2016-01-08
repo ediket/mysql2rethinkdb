@@ -3,6 +3,7 @@
 var mysql2rethinkdb = require('../');
 var argv = require('yargs')
   .usage('Usage: $0 -D [database]')
+  .example('$0 -u root -D test -t user_table post_table')
   .alias('h', 'host')
   .nargs('h', 1)
   .describe('h', 'Mysql host')
@@ -19,9 +20,9 @@ var argv = require('yargs')
   .nargs('D', 1)
   .demand(['D'])
   .describe('D', 'Mysql database')
-  .alias('t', 'table')
-  .nargs('t', 1)
-  .describe('t', 'Mysql table')
+  .alias('t', 'tables')
+  .array('t')
+  .describe('t', 'Mysql tables')
   .help('help')
   .argv;
 
@@ -31,7 +32,7 @@ mysql2rethinkdb({
   password: argv.password,
   port: argv.port,
   database: argv.database,
-  table: argv.table,
+  tables: argv.tables,
 }).then(function () {
   process.exit();
 });

@@ -33,7 +33,8 @@ function logMigrationEnd() {
 }
 
 async function mysql2rethinkdb(options = {}) {
-  const { host, port, password, user, database, table } = options;
+  const { host, port, password, user, database } = options;
+  let { tables } = options;
   const mysqlOptions = _.omit({
     host,
     port,
@@ -48,8 +49,9 @@ async function mysql2rethinkdb(options = {}) {
 
   logMigrationStart();
 
-  const tables = table ?
-    [table] : await getMysqlTables(connection);
+  if (!tables) {
+    tables = await getMysqlTables(connection);
+  }
 
   logTables(tables);
 
