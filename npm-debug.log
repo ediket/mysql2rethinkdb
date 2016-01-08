@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/leechulhee/.nvm/versions/node/v4.2.2/bin/node',
+1 verbose cli   '/Users/leechulhee/.nvm/versions/node/v4.2.2/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.5.3
+3 info using node@v4.2.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/leechulhee/Developer/Projects/mysql2rethinkdb',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package.tgz not in flight; packing
+9 info lifecycle mysql2rethinkdb@1.2.0~prepublish: mysql2rethinkdb@1.2.0
+10 verbose lifecycle mysql2rethinkdb@1.2.0~prepublish: unsafe-perm in lifecycle true
+11 verbose lifecycle mysql2rethinkdb@1.2.0~prepublish: PATH: /Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/bin/node-gyp-bin:/Users/leechulhee/Developer/Projects/mysql2rethinkdb/node_modules/.bin:/Users/leechulhee/.rvm/gems/ruby-2.1.2/bin:/Users/leechulhee/.rvm/gems/ruby-2.1.2@global/bin:/Users/leechulhee/.rvm/rubies/ruby-2.1.2/bin:/Users/leechulhee/.rbenv/shims:/Users/leechulhee/.nvm/versions/node/v4.2.2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/leechulhee/.rvm/bin
+12 verbose lifecycle mysql2rethinkdb@1.2.0~prepublish: CWD: /Users/leechulhee/Developer/Projects/mysql2rethinkdb
+13 silly lifecycle mysql2rethinkdb@1.2.0~prepublish: Args: [ '-c', 'babel -d lib src' ]
+14 silly lifecycle mysql2rethinkdb@1.2.0~prepublish: Returned: code: 0  signal: null
+15 verbose tar pack [ '/Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package.tgz',
+15 verbose tar pack   '/Users/leechulhee/Developer/Projects/mysql2rethinkdb' ]
+16 verbose tarball /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package.tgz
+17 verbose folder /Users/leechulhee/Developer/Projects/mysql2rethinkdb
+18 verbose addLocalTarball adding from inside cache /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package.tgz
+19 silly cache afterAdd mysql2rethinkdb@1.2.0
+20 verbose afterAdd /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package/package.json not in flight; writing
+21 verbose afterAdd /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package/package.json written
+22 silly publish { name: 'mysql2rethinkdb',
+22 silly publish   version: '1.2.0',
+22 silly publish   description: 'Migrate mysql tables into rethinkdb.',
+22 silly publish   main: './lib/mysql2rethinkdb.js',
+22 silly publish   bin: { mysql2rethinkdb: './bin/mysql2rethinkdb' },
+22 silly publish   files: [ 'README.md', 'bin', 'lib' ],
+22 silly publish   author: { name: 'ironhee' },
+22 silly publish   license: 'MIT',
+22 silly publish   scripts: { prepublish: 'babel -d lib src' },
+22 silly publish   dependencies:
+22 silly publish    { 'babel-polyfill': '^6.3.14',
+22 silly publish      bluebird: '^3.1.1',
+22 silly publish      chalk: '^1.1.1',
+22 silly publish      lodash: '^3.10.1',
+22 silly publish      mysql: '^2.10.0',
+22 silly publish      'run-parallel-limit': '^1.0.2',
+22 silly publish      shelljs: '^0.5.3',
+22 silly publish      yargs: '^3.31.0' },
+22 silly publish   devDependencies:
+22 silly publish    { babel: '^5.8.34',
+22 silly publish      'babel-eslint': '^4.1.6',
+22 silly publish      eslint: '^1.10.3',
+22 silly publish      'eslint-config-airbnb': '^3.0.2' },
+22 silly publish   readme: '[![npm version](https://badge.fury.io/js/mysql2rethinkdb.svg)](https://badge.fury.io/js/mysql2rethinkdb)\n\n# What is it\n\nMigrate mysql tables into rethinkdb.\n\n# Usage\n\nBefore use command, Check [Rethinkdb python driver](http://www.rethinkdb.com/docs/install-drivers/python/) is installed. Because `rethinkdb import` command is implemented by python.\n\n__Command-Line__\n\n```bash\nnpm install -g mysql2rethinkdb;\nmysql2rethinkdb -u [user] -p [password] -h [host] -P [port] -D [database] -t [tables] -w [worker count]\n```\n\n__Source Code__\n\n```bash\nnpm install -S mysql2rethinkdb;\n```\n\n```js\nvar mysql2rethinkdb = require(\'mysql2rethinkdb\');\n\nmysql2rethinkdb({\n  host: \'localhost\',\n  user: \'root\',\n  password: \'\',\n  port: \'3306\',\n  database: \'test\',\n  tables: [\'user\', \'post\']\n});\n```\n\n# Related Links\n\n- https://rethinkdb.com/docs/importing/\n',
+22 silly publish   readmeFilename: 'README.md',
+22 silly publish   gitHead: 'f5d8bb0de99bbf9f713a2f553cae240b8a8badbc',
+22 silly publish   _id: 'mysql2rethinkdb@1.2.0',
+22 silly publish   _shasum: '1b3935b7915a5eced70adceae395d0340a55a879',
+22 silly publish   _from: '.' }
+23 verbose getPublishConfig undefined
+24 silly mapToRegistry name mysql2rethinkdb
+25 silly mapToRegistry using default registry
+26 silly mapToRegistry registry https://registry.npmjs.org/
+27 silly mapToRegistry uri https://registry.npmjs.org/mysql2rethinkdb
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/leechulhee/.npm/mysql2rethinkdb/1.2.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/mysql2rethinkdb
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 18:19:34
+33 verbose request using bearer token for auth
+34 verbose request id 4377f4df2cee8693
+35 http request PUT https://registry.npmjs.org/mysql2rethinkdb
+36 http 403 https://registry.npmjs.org/mysql2rethinkdb
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Fri, 08 Jan 2016 09:19:35 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-nrt6131-NRT',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1452244775.163179,VS0,VE549' }
+38 verbose request invalidating /Users/leechulhee/.npm/registry.npmjs.org/mysql2rethinkdb on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.2.0." : mysql2rethinkdb
+40 verbose stack     at makeError (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/request/request.js:198:22)
+40 verbose stack     at emitTwo (events.js:87:13)
+40 verbose stack     at Request.emit (events.js:172:7)
+40 verbose stack     at Request.<anonymous> (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/request/request.js:1035:10)
+40 verbose stack     at emitOne (events.js:82:20)
+40 verbose stack     at Request.emit (events.js:169:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/Users/leechulhee/.nvm/versions/node/v4.2.2/lib/node_modules/npm/node_modules/request/request.js:962:12)
+41 verbose statusCode 403
+42 verbose pkgid mysql2rethinkdb
+43 verbose cwd /Users/leechulhee/Developer/Projects/mysql2rethinkdb
+44 error Darwin 15.0.0
+45 error argv "/Users/leechulhee/.nvm/versions/node/v4.2.2/bin/node" "/Users/leechulhee/.nvm/versions/node/v4.2.2/bin/npm" "publish"
+46 error node v4.2.2
+47 error npm  v3.5.3
+48 error code E403
+49 error "You cannot publish over the previously published version 1.2.0." : mysql2rethinkdb
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
