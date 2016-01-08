@@ -1,33 +1,39 @@
 require('babel-polyfill');
+import chalk from 'chalk';
 import mysql from 'mysql';
 import _ from 'lodash';
 import {
+  getMysqlTables,
+  getMysqlTableRows,
+  saveTableRowsAsJson,
+  importRethinkdbFromJson,
   removeFile,
 } from './helpers';
 import {
-  mysql2json,
-  json2rethinkdb,
-  getMysqlTables,
 } from './converters';
 
+function logMigrationStart() {
+  console.log(chalk.cyan.bold('Migration start.'));
+}
+
 function logTables(tables) {
-  console.log(`${ tables.length } mysql tables exist`);
-  console.log(`----------------`);
-  _.each(tables, table => console.log(table));
-  console.log(`----------------\n`);
+  console.log(chalk.yellow(`${ tables.length } mysql tables are selected.`));
 }
 
-function logTableMigrated(dbName, table) {
-  console.log(`Table migrated: ${dbName}.${table}`);
+function logTableMigrated(database, table) {
+  console.log(chalk.green(`[Migrated] ${database}.${table}`));
 }
 
-function logMigrationSuccess() {
-  console.log('\n');
-  console.log('Migration success!');
+function logTableMigrationFail(database, table, error) {
+  console.log(chalk.red(`[Error] ${database}.${table}`, error));
+}
+
+function logMigrationEnd() {
+  console.log(chalk.cyan.bold('Migration end.'));
 }
 
 async function mysql2rethinkdb(options = {}) {
-  const { host, port, password, user, database } = options;
+  const { host, port, password, user, database, table } = options;
   const mysqlOptions = _.omit({
     host,
     port,
@@ -40,28 +46,30 @@ async function mysql2rethinkdb(options = {}) {
 
   connection.connect();
 
-  const tables = await getMysqlTables(connection);
+  logMigrationStart();
+
+  const tables = table ?
+    [table] : await getMysqlTables(connection);
 
   logTables(tables);
 
-  await Promise.all(
-    _.map(tables, async table => {
-      const fileName = await mysql2json({
-        connection,
-        database,
-        table,
-      });
-      await json2rethinkdb({
+  await *_.map(tables, async table => {
+    try {
+      const rows = await getMysqlTableRows({ connection, table });
+      const fileName = saveTableRowsAsJson({ table, rows });
+      await importRethinkdbFromJson({
         fileName,
         database,
         table,
       });
       removeFile(fileName);
       logTableMigrated(database, table);
-    })
-  );
+    } catch (e) {
+      logTableMigrationFail(database, table, e);
+    }
+  });
 
-  logMigrationSuccess();
+  logMigrationEnd();
 
   connection.end();
 }

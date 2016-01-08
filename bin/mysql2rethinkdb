@@ -19,6 +19,9 @@ var argv = require('yargs')
   .nargs('D', 1)
   .demand(['D'])
   .describe('D', 'Mysql database')
+  .alias('t', 'table')
+  .nargs('t', 1)
+  .describe('t', 'Mysql table')
   .help('help')
   .argv;
 
@@ -28,6 +31,7 @@ mysql2rethinkdb({
   password: argv.password,
   port: argv.port,
   database: argv.database,
+  table: argv.table,
 }).then(function () {
   process.exit();
 });

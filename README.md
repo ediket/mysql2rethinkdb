@@ -6,6 +6,8 @@ Migrate mysql tables into rethinkdb.
 
 # Usage
 
+Before use command, Check [Rethinkdb python driver](http://www.rethinkdb.com/docs/install-drivers/python/) is installed. Because `rethinkdb import` command is implemented by python.
+
 __Command-Line__
 
 ```bash
