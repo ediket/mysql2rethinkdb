@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /* eslint no-var: 0, vars-on-top: 0 */
+require('babel-polyfill');
 var mysql2rethinkdb = require('../');
 var argv = require('yargs')
   .usage('Usage: $0 -D [database]')

@@ -1,13 +1,10 @@
-require('babel-polyfill');
 import chalk from 'chalk';
 import mysql from 'mysql';
 import _ from 'lodash';
 import {
   getMysqlTables,
   getMysqlTableRows,
-  saveTableRowsAsJson,
-  importRethinkdbFromJson,
-  removeFile,
+  importIntoRethinkdb,
 } from './helpers';
 import { promisify } from 'bluebird';
 const runParallelLimit = promisify(require('run-parallel-limit'));
@@ -33,7 +30,7 @@ function logMigrationEnd() {
 }
 
 async function mysql2rethinkdb(options = {}) {
-  const { host, port, password, user, database, workers = 8 } = options;
+  const { host, port, password, user, database, workers = 8, transform } = options;
   let { tables } = options;
   const mysqlOptions = _.omit({
     host,
@@ -59,13 +56,12 @@ async function mysql2rethinkdb(options = {}) {
     _.map(tables, table => async callback => {
       try {
         const rows = await getMysqlTableRows({ connection, table });
-        const fileName = saveTableRowsAsJson({ table, rows });
-        await importRethinkdbFromJson({
-          fileName,
+        await importIntoRethinkdb({
           database,
           table,
+          rows,
+          ..._.isFunction(transform) ? transform({ table, rows }) : {},
         });
-        removeFile(fileName);
         logTableMigrated(database, table);
         callback(null, table);
       } catch (e) {

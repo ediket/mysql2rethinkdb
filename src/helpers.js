@@ -42,3 +42,13 @@ export async function importRethinkdbFromJson({ fileName, database, table }) {
   `;
   return await runShellCommand(cmd);
 }
+
+export async function importIntoRethinkdb({ database, table, rows }) {
+  const fileName = saveTableRowsAsJson({ table, rows });
+  await importRethinkdbFromJson({
+    fileName,
+    database,
+    table,
+  });
+  removeFile(fileName);
+}

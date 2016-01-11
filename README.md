@@ -22,7 +22,7 @@ npm install -S mysql2rethinkdb;
 ```
 
 ```js
-var mysql2rethinkdb = require('mysql2rethinkdb');
+import mysql2rethinkdb from 'mysql2rethinkdb';
 
 mysql2rethinkdb({
   host: 'localhost',
@@ -30,7 +30,14 @@ mysql2rethinkdb({
   password: '',
   port: '3306',
   database: 'test',
-  tables: ['user', 'post']
+  tables: ['user', 'post'],
+  transform: ({ table, rows }) => ({
+    table: '_' + table,
+    rows: rows.map(row => ({
+      ...row
+      hello: 'world'
+    })),
+  }),
 });
 ```
 
