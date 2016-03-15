@@ -1,9 +1,8 @@
 {
   "name": "mysql2rethinkdb",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Migrate mysql tables into rethinkdb.",
   "main": "./lib/mysql2rethinkdb.js",
-  "bin": "./bin/mysql2rethinkdb",
   "files": [
     "README.md",
     "bin",

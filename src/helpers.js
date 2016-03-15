@@ -33,22 +33,41 @@ export function saveTableRowsAsJson({ table, rows }) {
   return fileName;
 }
 
-export async function importRethinkdbFromJson({ fileName, database, table }) {
+export async function importRethinkdbFromJson({
+  host = 'localhost',
+  port = 28015,
+  authKey,
+  database,
+  table,
+  fileName,
+}) {
   const cmd = `
     rethinkdb import \
       -f ${fileName} \
+      --connect ${host}:${port} \
+      ${authKey ? '--auth ' + authKey : ''} \
       --table ${database}.${table} \
       --force
   `;
   return await runShellCommand(cmd);
 }
 
-export async function importIntoRethinkdb({ database, table, rows }) {
+export async function importIntoRethinkdb({
+  host,
+  port,
+  authKey,
+  database,
+  table,
+  rows,
+}) {
   const fileName = saveTableRowsAsJson({ table, rows });
   await importRethinkdbFromJson({
-    fileName,
+    host,
+    port,
+    authKey,
     database,
     table,
+    fileName,
   });
   removeFile(fileName);
 }

@@ -30,15 +30,13 @@ function logMigrationEnd() {
 }
 
 async function mysql2rethinkdb(options = {}) {
-  const { host, port, password, user, database, workers = 8, transform } = options;
+  const {
+    mysql: mysqlOptions,
+    rethinkdb: rethinkdbOptions,
+    workers = 8,
+    transform,
+  } = options;
   let { tables } = options;
-  const mysqlOptions = _.omit({
-    host,
-    port,
-    user,
-    password,
-    database,
-  }, _.isUndefined);
 
   const connection = mysql.createConnection(mysqlOptions);
 
@@ -57,15 +55,18 @@ async function mysql2rethinkdb(options = {}) {
       try {
         const rows = await getMysqlTableRows({ connection, table });
         await importIntoRethinkdb({
-          database,
+          host: rethinkdbOptions.host,
+          port: rethinkdbOptions.port,
+          database: rethinkdbOptions.database,
+          authKey: rethinkdbOptions.authKey,
           table,
           rows,
           ..._.isFunction(transform) ? transform({ table, rows }) : {},
         });
-        logTableMigrated(database, table);
+        logTableMigrated(rethinkdbOptions.database, table);
         callback(null, table);
       } catch (e) {
-        logTableMigrationFail(database, table, e);
+        logTableMigrationFail(rethinkdbOptions.database, table, e);
         callback(table, null);
       }
     }), workers
